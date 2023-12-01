@@ -9,8 +9,8 @@ const Home = () => {
   const [playerName, setPlayerName] = useState('');
   const navigate = useNavigate();
 
-  const handleClick = async () => {
-    try {
+ const handleClick = async () => {
+   try {
       const playerExists = await contract.isPlayer(walletAddress);
 
       if (!playerExists) {
@@ -28,6 +28,35 @@ const Home = () => {
       setErrorMessage(error);
     }
   };
+
+ /* const handleClick = async () => {
+    try {
+      console.log('Attempting to check if player exists...');
+      const playerExists = await contract.isPlayer(walletAddress);
+      console.log('Player exists:', playerExists);
+  
+      if (!playerExists) {
+        console.log('Player does not exist. Registering...');
+        await contract.registerPlayer(playerName, playerName, { gasLimit: 500000 });
+        console.log('Registration successful for', playerName);
+  
+        setShowAlert({
+          status: true,
+          type: 'info',
+          message: `${playerName} is being summoned!`,
+        });
+  
+        setTimeout(() => {
+          console.log('Navigating to /create-battle...');
+          navigate('/create-battle');
+        }, 8000);
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      setErrorMessage(error);
+    }
+  };*/
+  
 
   useEffect(() => {
     const createPlayerToken = async () => {
